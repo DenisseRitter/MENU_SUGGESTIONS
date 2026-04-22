@@ -102,6 +102,25 @@
       margin-top: 8px;
     }
 
+    .comments-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .pdf-link {
+      font-size: 0.9em;
+      color: #0072c6;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .pdf-link:hover {
+      text-decoration: underline;
+    }
+
     .intro-text {
       margin-bottom: 20px;
       font-size: 0.95rem;
@@ -201,7 +220,10 @@
         </label>
       </div>
 
-      <p id="labelComments" class="note">Besondere Wünsche / Allergien (optional):</p>
+      <div class="comments-row">
+        <p id="labelComments" class="note">Besondere Wünsche / Allergien (optional):</p>
+        <a id="allergyPdfLink" class="pdf-link" href="./allergene.pdf" target="_blank" rel="noopener noreferrer">PDF Allergene / Zusatzinformationen</a>
+      </div>
       <textarea id="comments"></textarea>
     </fieldset>
 
@@ -219,22 +241,22 @@
 <script>
 const data = {
 de:{
-starters:["Keine Vorspeise","Karottencremesuppe","Bunter Blattsalat mit Gurke und Tomate & Hausdressing","Caprese Salat","Kürbiscremesuppe"],
-mains:["Spinatgnocchi in Tomaten-Ricotta-Sauce","Überbackene Cannelloni mit Ricotta und Spinat in Tomatensauce","Hähnchenschenkel mit Gemüsereis-Pilaw","Hähnchenbrust mit Pilzrahmsauce auf Reis","Spaghetti Bolognese","Schwedische Fleischbällchen mit Gemüse","Fischfilet in Weissweinrahm- oder Puttanesca-Sauce mit Country Potatoes"],
-desserts:["Kein Dessert","Fruchtsalat mit Vanilleeis","Schokoladenmousse","Brownie","Panna Cotta"],
+starters:["Keine Vorspeise","Kürbissuppe","Kartoffel-Lauch-Suppe","Gemischter Salat","Tabbouleh-Salat"],
+mains:["Im Ofen gebackener St. Petersfisch, serviert mit zitronenverfeinertem Olivenöl, Paprika und Kräuterkartoffeln","Fisch in Knoblauch-Weissweinsauce nach Merluza-Art, serviert mit gedämpftem Reis und grünen Bohnen","Zitronen-Kräuter-Hähnchen aus dem Ofen, serviert mit aromatischem Reis nach spanischer Art","Ofengebackenes Hähnchen, serviert mit zartem Reis-Pilaw und frischem buntem Gemüse","Beef Stroganoff – zarte Rindfleischstreifen in einer reichhaltigen, cremigen Sauce, serviert mit Pasta","Gemüse-Curry – aromatisches Gemüse in einer würzigen Currysauce, serviert mit gedämpftem Reis","Spaghetti Bolognese","Pasta Primavera"],
+desserts:["Kein Dessert","Brownies","Panna Cotta, serviert mit feinem Beerenkompott","Schokoladenmousse","Fruchtsalat"],
 introText:"Wir freuen uns, Ihnen ein 2- oder 3-Gang-Menü für Ihre Gruppe anbieten zu dürfen. Bitte wählen Sie eine Vorspeise, einen Hauptgang und ein Dessert aus, das gewählte Menü gilt für alle Gäste.\n\nBei Fragen oder besonderen Wünschen stehen wir Ihnen selbstverständlich jederzeit gerne zur Verfügung.\nWir freuen uns auf Ihre Menüauswahl."
 },
 en:{
-starters:["No starter","Carrot cream soup","Colorful lettuce with cucumber and tomato & house dressing","Caprese salad","Pumpkin cream soup"],
-mains:["Spinach gnocchi in tomato and ricotta sauce","Baked cannelloni with ricotta and spinach in tomato sauce","Baked chicken legs with vegetable rice pilaf","Chicken breast with mushroom in cream sauce on rice","Spaghetti Bolognese","Swedish meatballs with vegetables","Fish filet in white wine cream (or Puttanesca) sauce with country potatoes"],
-desserts:["No dessert","Fruit salad with vanilla ice cream","Chocolate mousse","Brownie","Panna Cotta"],
+starters:["No starter","Pumpkin Soup","Potato Leek Soup","Mixed Salad","Tabbouleh Salad"],
+mains:["Oven-baked St. Peter fish, served with lemon-infused olive oil and paprika, accompanied by herbed potatoes","Garlic white wine Fish (Merluza Style) With Steamed Rice and Green Beans","Lemon Herb Roasted Chicken served with fragrant Spanish-style rice","Oven Baked Chicken served with tender rice pilaf and fresh, colorful vegetables","Beef Stroganoff Tender strips of beef in a rich, creamy sauce, served over pasta","Vegetable Curry Aromatic vegetables simmered in a rich, spiced curry, served with steamed rice","Spaghetti Bolognese","Pasta Primavera"],
+desserts:["No dessert","Brownies","Panna Cotta served with a luscious berry compote","Chocolate Mousse","Fruit Salad"],
 introText:"We are pleased to offer a 2- or 3-course menu for your group. Please select one starter, one main course, and one dessert; the selected menu applies to all guests.\n\nIf you have any questions or special requests, we are always happy to assist you.\nWe look forward to your menu selection."
 }
 };
 
 const texts={
-de:{title:"Gruppenmenü – ibis Zürich Messe Airport",pageTitle:"Gruppenmenü – ibis Zürich Messe Airport",starter:"Vorspeise",main:"Hauptgang",dessert:"Dessert",details:"Angaben",date:"Datum",guests:"Anzahl Personen",time:"Uhrzeit",comments:"Besondere Wünsche / Allergien (optional):",submit:"Auswahl per E-Mail senden",note:"Beim Klick öffnet sich Ihr E-Mail-Programm und eine neue Mail an H2980-RE@accor.com wird vorbereitet.",menuNote:"Alle Menüs beinhalten Brot und Wasser und sind im Preis inbegriffen."},
-en:{title:"Group Menu – ibis Zürich Messe Airport",pageTitle:"Group Menu – ibis Zürich Messe Airport",starter:"Starter",main:"Main Course",dessert:"Dessert",details:"Details",date:"Date",guests:"Number of guests",time:"Time",comments:"Special requests / allergies (optional):",submit:"Send selection by e-mail",note:"Clicking will open your e-mail program and prepare a message to H2980-RE@accor.com.",menuNote:"All menus come with bread and water, included in the price."}
+de:{title:"Gruppenmenü – ibis Zürich Messe Airport",pageTitle:"Gruppenmenü – ibis Zürich Messe Airport",starter:"Vorspeise",main:"Hauptgang",dessert:"Dessert",details:"Angaben",date:"Datum",guests:"Anzahl Personen",time:"Uhrzeit",comments:"Besondere Wünsche / Allergien (optional):",submit:"Auswahl per E-Mail senden",note:"Beim Klick öffnet sich Ihr E-Mail-Programm und eine neue Mail an H2980-RE@accor.com wird vorbereitet.",menuNote:"Alle Menüs beinhalten Brot und Wasser und sind im Preis inbegriffen.",pdfLink:"PDF Allergene / Zusatzinformationen"},
+en:{title:"Group Menu – ibis Zürich Messe Airport",pageTitle:"Group Menu – ibis Zürich Messe Airport",starter:"Starter",main:"Main Course",dessert:"Dessert",details:"Details",date:"Date",guests:"Number of guests",time:"Time",comments:"Special requests / allergies (optional):",submit:"Send selection by e-mail",note:"Clicking will open your e-mail program and prepare a message to H2980-RE@accor.com.",menuNote:"All menus come with bread and water, included in the price.",pdfLink:"PDF allergies / additional information"}
 };
 
 function createOptions(list,name){
@@ -261,6 +283,7 @@ document.getElementById("labelDate").firstChild.textContent=t.date+" / Date: ";
 document.getElementById("labelGuests").firstChild.textContent=t.guests+": ";
 document.getElementById("labelTime").firstChild.textContent=t.time+": ";
 document.getElementById("labelComments").textContent=t.comments;
+document.getElementById("allergyPdfLink").textContent=t.pdfLink;
 document.getElementById("submitBtn").textContent=t.submit;
 document.getElementById("note").textContent=t.note;
 document.getElementById("menuNote").textContent=t.menuNote;
