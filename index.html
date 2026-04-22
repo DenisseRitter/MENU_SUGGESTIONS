@@ -147,8 +147,8 @@
   <div class="lang-toggle">
     <label>Language / Sprache:
       <select id="language" onchange="switchLanguage()">
+        <option value="en" selected>English</option>
         <option value="de">Deutsch</option>
-        <option value="en">English</option>
       </select>
     </label>
   </div>
@@ -222,7 +222,7 @@
 
       <div class="comments-row">
         <p id="labelComments" class="note">Besondere Wünsche / Allergien (optional):</p>
-        <a id="allergyPdfLink" class="pdf-link" href="./allergene.pdf" target="_blank" rel="noopener noreferrer">PDF Allergene / Zusatzinformationen</a>
+        <a id="allergyPdfLink" class="pdf-link" href="https://github.com/DenisseRitter/MENU_SUGGESTIONS/blob/main/allergene.pdf?raw=1" target="_blank" rel="noopener noreferrer">PDF Allergene / Zusatzinformationen</a>
       </div>
       <textarea id="comments"></textarea>
     </fieldset>
@@ -287,7 +287,7 @@ document.getElementById("allergyPdfLink").textContent=t.pdfLink;
 document.getElementById("submitBtn").textContent=t.submit;
 document.getElementById("note").textContent=t.note;
 document.getElementById("menuNote").textContent=t.menuNote;
-document.getElementById("introText").textContent=data[lang].introText;
+document.getElementById("introText").innerHTML = data[lang].introText.replace(/\n\n/g, "<br><br>").replace(/\n/g, "<br>");
 
 renderMenu(lang);
 }
@@ -311,6 +311,7 @@ return false;
 }
 
 const to='H2980-RE@accor.com';
+const cc='Victoria.PARHAM@accor.com,Myriam.schmid@accor.com,Makda.GHIRMA-HAILE@accor.com,Roberto.PISCHEDDA@accor.com,H2980@accor.com';
 const subject='Group Menu – ibis Zürich Messe Airport';
 
 const body=`GRUPPE / GROUP NAME: ${groupName}
@@ -338,11 +339,11 @@ ${comments}
 
 Gesendet von: ibis Zürich Messe Airport Menüformular`;
 
-window.location.href=`mailto:${encodeURIComponent(to)}?bcc=${encodeURIComponent(email)}&subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+window.location.href=`mailto:${encodeURIComponent(to)}?cc=${encodeURIComponent(cc)}&bcc=${encodeURIComponent(email)}&subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 return false;
 }
 
-renderMenu("de");
+switchLanguage();
 </script>
 
 </body>
